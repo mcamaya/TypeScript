@@ -1,0 +1,14 @@
+
+class Cliente {
+    constructor(
+        public readonly id: number,
+        public nombre: string,
+        public numeroDocumento: number,
+        public tipoDocumento: string,
+        public celular: number,
+        public email: string,
+        public activo: boolean = true
+    ){}
+
+    
+}
