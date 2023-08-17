@@ -52,11 +52,12 @@ class Nivel {
     }
 }
 class Camper {
-    constructor(id, nombre, nivel, activo = true) {
+    constructor(id, nombre, nivel, activo = true, finalizado = false) {
         this.id = id;
         this.nombre = nombre;
         this.nivel = nivel;
         this.activo = activo;
+        this.finalizado = finalizado;
     }
     get Nombre() {
         return this.nombre;
@@ -66,6 +67,16 @@ class Camper {
     }
     set Activo(isActivo) {
         this.activo = isActivo;
+    }
+    contratar(id, ruta, modalidad) {
+        if (this.finalizado === true) {
+            let newContratado = new Contrato(id, this.nombre, ruta, modalidad);
+            contratos.push(newContratado);
+            return console.log(`Camper contratado: ${this.nombre}`);
+        }
+        else {
+            return console.log(`Camper no ha finalizado el entrenamiento`);
+        }
     }
 }
 class Contrato {
@@ -101,11 +112,12 @@ let diseño = new Nivel(3, "Diseño web");
 let html = new Nivel(4, "Bases HTML");
 let Python = new Nivel(5, "Python");
 //instancias Camper
-let camper1 = new Camper(1, 'Fulano', "Lógica de Programación");
-let camper2 = new Camper(2, 'Sebas', "Bases HTML");
-let camper3 = new Camper(3, 'Esteban', "Programación Orientada a Objetos");
-let camper4 = new Camper(4, 'Daniela', "Diseño web");
-let camper5 = new Camper(5, 'Vicky', "Bases HTML");
+let camper1 = new Camper(1, 'Fulano', "Lógica de Programación", true);
+let camper2 = new Camper(2, 'Sebas', "Bases HTML", true);
+let camper3 = new Camper(3, 'Esteban', "Programación Orientada a Objetos", true);
+let camper4 = new Camper(4, 'Daniela', "Diseño web", true);
+let camper5 = new Camper(5, 'Vicky', "Bases HTML", true);
+let camper6 = new Camper(6, 'Deiby', "Astro Framework");
 //instancias Contrato
 let contrato1 = new Contrato(1, 'Junior Backend Developer', 'Fulano', 'Remoto');
 let contrato2 = new Contrato(2, 'Junior Frontend Developer', 'Sebas', 'Presencial');
@@ -113,6 +125,10 @@ let contrato3 = new Contrato(3, 'Junior Data Scientist', 'Esteban', 'Presencial'
 let contrato4 = new Contrato(4, 'Junior Backend Developer', 'Daniela', 'Presencial');
 let contrato5 = new Contrato(5, 'Junior Backend Developer', 'Vicky', 'Remoto');
 let contratos = [contrato1, contrato2, contrato3, contrato4, contrato5];
+camper6.contratar(6, 'Astro Framework', 'Remoto');
+console.log('----------------------------------------------------------------');
+camper6.finalizado = true;
+camper6.contratar(6, 'Astro Framework', 'Remoto');
 const reportesContratos = () => {
     let remotosCampers = [];
     let presencialesCampers = [];
